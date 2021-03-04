@@ -15,7 +15,7 @@
 
   <!--Internal JavaScript-->
   <script>
-    //Send patient FIXED FINAL.json to web server, request it and parse it to object data type
+    //Send patientFIXED.json to web server, request it and parse it to object data type
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -40,7 +40,8 @@
           document.getElementById("ListConditions").innerHTML = "List of all conditions: " + list_conditions;
         }
     };
-    xhttp.open("GET", "patient FIXED FINAL.json", true);
+    //open and send patientFIXED.json
+    xhttp.open("GET", "patientFIXED.json", true);
     xhttp.send();
 
     //FOR REFERENCE
