@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SeamlessMD Assignment</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <!--paragraph tags used for identifying and displaying information-->
+  <p id="Name"></p>
+  <p id="Organization"></p>
+  <p id="Gender"></p>
+  <p id="NumConditions"></p>
+  <p id="ListConditions"></p>
+
+  <!--Internal JavaScript-->
+  <script>
+    //In this case, the syntax didn't change from JSON to Object, so we could just copy and paste JSON texts as the value of an Object data type
+    var Patient_Object = {
+    	"resourceType": "Patient",
+    	"id": "xcda",
+
+    	"text": {
+    		"status": "generated",
+    		"div": "\n      \n      <p>Henry Levin the 7th</>\n    \n    </div>"
+    	},
+
+    	"identifier": [{
+    		"use": "usual",
+    		"type": {
+    			"coding": [{
+    				"system": "htt://hl7.org/fhir/v2/0203",
+    				"code": "MR"
+    			}]
+    		},
+    		"system": "urn:oid:2.16.840.1.113883.19.5",
+    		"value": "12345"
+    	}],
+
+    	"active": true,
+
+    	"name": [{
+          "family": ["Levin"],
+          "given": ["Henry"]
+        }],
+
+    	"gender": "male",
+    	"birthDate": "2002-09-24",
+
+    	"managingOrganization": {
+    		"reference": "Organization/2.16.840.1.113883.19.5",
+    		"display": "University Health Network"
+    	},
+
+    	"conditions": [
+    		"Diabetes",
+    		"High blood pressure",
+    		"Asthma"
+    	]
+    };
+
+    //Extract information from JSON that had been converted to Object
+    name_patient = Patient_Object.name[0].given + " " + Patient_Object.name[0].family;
+    organization_name = Patient_Object.managingOrganization.display;
+    gender = Patient_Object.gender;
+    num_conditions = Patient_Object.conditions.length;
+    list_conditions = "";
+    for (var i = 0; i < Patient_Object.conditions.length; i ++) {
+      list_conditions += "<li>" + Patient_Object.conditions[i] + "</li>";
+    }
+
+    //Output HTML and display information on webpage
+    document.getElementById("Name").innerHTML = "Name of patient: " + name_patient;
+    document.getElementById("Organization").innerHTML = "Organization name: " + organization_name;
+    document.getElementById("Gender").innerHTML = "Gender: " + gender;
+    document.getElementById("NumConditions").innerHTML = "Number of conditions they have: " + num_conditions;
+    document.getElementById("ListConditions").innerHTML = "List of all conditions: " + list_conditions;
+  </script>
+
+</body>
+</html>
