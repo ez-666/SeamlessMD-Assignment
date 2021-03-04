@@ -65,13 +65,30 @@
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           var Patient_Object = JSON.parse(xhttp.responseText);
+
+          //Extract information from JSON that had been converted to Object
+          name_patient = Patient_Object.name[0].given + " " + Patient_Object.name[0].family;
+          organization_name = Patient_Object.managingOrganization.display;
+          gender = Patient_Object.gender;
+          num_conditions = Patient_Object.conditions.length;
+          list_conditions = "";
+          for (var i = 0; i < Patient_Object.conditions.length; i ++) {
+            list_conditions += "<li>" + Patient_Object.conditions[i] + "</li>";
+          }
+
+          //Output HTML and display information on webpage
+          document.getElementById("Name").innerHTML = "Name of patient: " + name_patient;
+          document.getElementById("Organization").innerHTML = "Organizationdfdfd name: " + organization_name;
+          document.getElementById("Gender").innerHTML = "Gender: " + gender;
+          document.getElementById("NumConditions").innerHTML = "Number of conditions they have: " + num_conditions;
+          document.getElementById("ListConditions").innerHTML = "List of all conditions: " + list_conditions;
         }
     };
     xhttp.open("GET", "patient FIXED FINAL.json", true);
     xhttp.send();
 
     //Extract information from JSON that had been converted to Object
-    name_patient = Patient_Object.name[0].given + " " + Patient_Object.name[0].family;
+    /*name_patient = Patient_Object.name[0].given + " " + Patient_Object.name[0].family;
     organization_name = Patient_Object.managingOrganization.display;
     gender = Patient_Object.gender;
     num_conditions = Patient_Object.conditions.length;
@@ -85,7 +102,7 @@
     document.getElementById("Organization").innerHTML = "Organizationdfdfd name: " + organization_name;
     document.getElementById("Gender").innerHTML = "Gender: " + gender;
     document.getElementById("NumConditions").innerHTML = "Number of conditions they have: " + num_conditions;
-    document.getElementById("ListConditions").innerHTML = "List of all conditions: " + list_conditions;
+    document.getElementById("ListConditions").innerHTML = "List of all conditions: " + list_conditions;*/
   </script>
 
 </body>
